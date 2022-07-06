@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% include 'partials/navbar.html' %}
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col mt-2">
+                    {% comment %} <button type="button" class="btn btn-success" style="width: 100%;">Add breed <i class="fas fa-plus"></i></button> {% endcomment %}
+                    <button type="button" class="btn btn-success" style="width: 100%;" data-toggle="modal" data-target="#exampleModal">
+                        Add breed <i class="fas fa-plus"></i>
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            {% include 'partials/AddBreed.html' %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col mt-2">
+                    {% comment %} <button type="button" class="btn btn-success" style="width: 100%;">Add breed <i class="fas fa-plus"></i></button> {% endcomment %}
+                    <button type="button" class="btn btn-secondary" style="width: 100%;" data-toggle="modal" data-target="#addAnimal">
+                        Add Animal <i class="fas fa-plus"></i>
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="addAnimal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            {% include 'partials/AddAnimal.html' %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col mt-2">
+                    <button type="button" class="btn btn-warning" style="width: 100%;" data-toggle="modal" data-target="#bookVet">
+                        Book Vet <i class="fas fa-paper-plane"></i>
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="bookVet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            {% include 'partials/BookVet.html' %}
+                        </div>
+                    </div>
+                    {% comment %} <button type="button" class="btn btn-warning" style="width: 100%;">Book Vet <i class="fas fa-paper-plane"></i></button> {% endcomment %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mt-2">
+                <div class="card" >
+                    <div class="card-header text-center">
+                      <b>Breeds</b>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% for breed in breeds %}
+                            <li class="list-group-item">{{breed.name}}</li>
+                        {% endfor %}
+                      
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8 mt-2">
+                <div>
+                    <h4 class="text-center">My Animals</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Name</th>
+                                {% comment %} <th scope="col">Age</th> {% endcomment %}
+                                <th scope="col">Breed</th>
+                                <th scope="col">Gender</th>
+                                <th scope="col">Weight</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for animal in animals %}
+                                <tr>
+                                    <td><img class="rounded-circle" width="50" height="50" src="{{animal.photo.url}}" alt="Card image cap"></td>
+                                    <td>{{animal.name}}</td>
+                                    <td>{{animal.breed }}</td>
+                                    <td>{{animal.gender }}</td>
+                                    <td>{{animal.weight }}</td>
+                                    <td>
+                                        <a href="#"><i class="fas fa-trash-alt text-danger"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    {% include 'partials/footer.html' %}
+{% endblock content %}

@@ -1,0 +1,63 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Animal</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form method="POST" enctype="multipart/form-data" action="{% url 'add_animal' %}" 
+    {% if messages %}
+    {% for message in messages %}
+     {% if message.tags %}  onSubmit="alert('{{message}}');" {% endif %}
+
+    {% endfor %}
+
+{% endif %}
+    >
+        {% csrf_token %}
+        <div class="form-group m-2">
+            <label for="formGroupExampleInput">Breed</label>
+            <select class="form-select" name="breed" aria-label="Default select example">
+                {% for breed in breeds %}                    
+                    <option value="{{breed.id}}">{{breed.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group m-2">
+            <label for="formGroupExampleInput">Animal Name: </label>
+            <input type="text" class="form-control" name="name" id="formGroupExampleInput" placeholder="Animal Name">
+        </div>
+        <div class="form-group m-2">
+            <label for="formGroupExampleInput">Gender</label>
+            <select class="form-select" name="gender" aria-label="Default select example">                                   
+                <option value="male">Male</option>                
+                <option value="female">Female</option>                
+            </select>
+        </div>
+        <div class="form-group m-2">
+            <label for="formGroupExampleInput">Animal Weight (Kg): </label>
+            <input type="number" min="1" class="form-control" name="weight" id="formGroupExampleInput" placeholder="Animal Weight">
+        </div>
+        <div class="form-group m-2">
+            <label for="formGroupExampleInput">Date of birth</label>
+            <input type="date" name="birth_date" class="form-control" id="formGroupExampleInput" placeholder="unit">
+        </div>     
+        <div class="form-group m-2">
+            <label for="photoFormInput">Animal Profile Image:</label>
+            <input type="file" name="photo" class="form-control-file" id="photoFormInput">
+        </div>
+        <div class="form-group m-2">
+            <label for="exampleFormControlTextarea1">Animal Allergies:</label>
+            <textarea class="form-control" name="allergies" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="form-group m-2">
+            <label for="exampleFormControlTextarea1">Animal Existing Conditions:</label>
+            <textarea class="form-control" name="existing_conditions" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-success">Save changes</button>
+        </div>
+        
+    </form>
+</div>

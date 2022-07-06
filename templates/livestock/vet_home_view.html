@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% include 'partials/navbar.html' %}
+    <main>
+        <div class="container">
+                <div class="row"></div>
+                <h3 class="text-center mt-2">My clients</h3>
+                <div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Full Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone Number</th>
+                                <th scope="col">Date Contacted</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for client  in clients %}
+                                <tr>
+                                    <td>{{client.booked_by.fullName}}</td>
+                                    <td>{{client.booked_by.email}}</td>
+                                    <td>{{client.booked_by.phoneNumber}}</td>
+                                    <td>{{client.date_created}}</td>
+                                </tr>
+                            {% endfor %}                            
+                        </tbody>
+                    </table>
+                </div>
+            
+             
+        </div>
+    </main>
+    {% include 'partials/footer.html' %}
+{% endblock content %}

@@ -1,0 +1,84 @@
+{% load static %}
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: #60a3bc;">
+    <div class="container">
+      <a class="navbar-brand" 
+      {% if user.is_superuser %}
+                href="{% url 'admin_home_dashboard' %}" 
+              {% elif user.role == "vet" %}  
+                href="{% url 'vet_home_view' %}"           
+              {% else %}
+                href="{% url 'farmer_home_view' %}"                
+              {% endif %}
+      
+      >
+        <img src="{% static 'img/logo.jpg' %}" class="rounded-circle" width="50" height="50" class="logo" alt="">Vet Clinic
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+        <ul class="navbar-nav">
+          <li>         
+            <a class="nav-link" 
+              {% if user.is_superuser %}
+                href="{% url 'admin_home_dashboard' %}"    
+              {% elif user.role == "vet" %}  
+                href="{% url 'vet_home_view' %}"           
+              {% else %}
+                href="{% url 'farmer_home_view' %}"                
+              {% endif %}
+            >Home</a>
+          </li>
+          <li>
+            <a class="nav-link"
+              {% if user.is_superuser %}
+                href="#" 
+              {% else %}
+                href="#"
+              {% endif %}
+            >
+              {% if user.is_superuser %}
+                users
+              
+              
+              {% endif %}
+            </a>
+          </li>
+          <li>
+            <a class="nav-link"
+              {% if user.is_superuser %}
+                href="#" 
+              {% elif user.role == "vet" %}
+                href="#" 
+              {% else %}
+                href="#"
+              {% endif %}
+            >
+              {% if user.is_superuser %}
+              
+              {% endif %}
+            </a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">          
+            
+            
+         
+            
+            <li>
+            {% if user.is_authenticated %}
+            <a class="nav-link" href="{% url 'logout' %}">
+                <i class="fas fa-sign-out-alt"></i>
+                logout</a>           
+            
+            {% endif %}         
+            
+              
+            </li>
+         
+        </ul>
+      </div>
+    </div>
+  </nav>

@@ -1,0 +1,28 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add breed</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form method="POST" action="{% url 'add_breed' %}" 
+    {% if messages %}
+    {% for message in messages %}
+     {% if message.tags %}  onSubmit="alert('{{message}}');" {% endif %}
+
+    {% endfor %}
+
+{% endif %}
+    >
+        {% csrf_token %}
+        <div class="form-group m-2">
+            <label for="formGroupExampleInput">Breed Name: </label>
+            <input type="text" class="form-control" name="name" id="formGroupExampleInput" placeholder="Breed Name">
+          </div>     
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-success">Save changes</button>
+        </div>
+        
+    </form>
+</div>

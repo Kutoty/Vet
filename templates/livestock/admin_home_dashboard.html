@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% include 'partials/navbar.html' %}
+    <main>
+        <div class="container ">
+            <div class="row">
+                <div class="col mt-2 ">
+                    <div class="card bg-primary">                        
+                          <h5 class="card-title">Total Officers: {{vet_count}}</h5>                          
+                    </div>
+                    
+                </div>
+                <div class="col mt-2">
+                    <div class="card bg-secondary">                        
+                        <h5 class="card-title">Total farmers: {{farmers_count}}</h5>                          
+                    </div>
+                    
+                </div>
+                <div class="col mt-2">
+                    <div class="card bg-success">                        
+                        <h5 class="card-title">Total Animals: {{animal_count}}</h5>                         
+                      
+                    </div>
+                </div>
+                <div class="col mt-2">
+                    <div class="card bg-success">                        
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+                            <i class="fas fa-plus"></i> Add Specialization
+                        </button>
+                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                {% include 'partials/AddSpecialization.html' %}
+                            </div>
+                        </div>                    
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div >
+                <div class="row">
+                    <div class="col m-2 border">
+                        <h4 class="text-center">farmers</h4>
+                        <div>
+                            <table class="table ">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Full Name</th>                                        
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Phone Number</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for farmer in farmers %}
+                                        <tr>
+                                            <td>{{farmer.fullName}}</td>
+                                            <td>{{farmer.email}}</td>
+                                            <td>{{farmer.phoneNumber}}</td>
+                                        <tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col m-2 border m-2">
+                        <h4 class="text-center">Veterinary Officers</h4>
+                        <div>
+                            <table class="table ">
+                                <thead>
+                                    <tr>
+                                       
+                                        <th scope="col">Full name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Phone Number</th>
+                                        <th scope="col">County</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for vet in vets %}
+                                        <tr>
+                                            <td>{{vet.fullName}}</td>
+                                            <td>{{vet.email}}</td>
+                                            <td>{{vet.phoneNumber}}</td>
+                                            <td>{{vet.county}}</td>
+                                        <tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    {% include 'partials/footer.html' %}
+{% endblock content %}
